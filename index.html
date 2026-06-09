@@ -1,178 +1,153 @@
-html
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>AgroIntegra - Poupa-Terra | ILPF Sustentável</title>
+    <title>AgroIntegra | Efeito Poupa-Terra</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Botão de Acessibilidade Fixo -->
-    <div class="botao-acessibilidade" id="botaoAcessibilidade">
-        <button id="btnAcessibilidade" aria-label="Abrir menu de acessibilidade">♿ Acessibilidade</button>
-        <div class="menu-acessibilidade" id="menuAcessibilidade" style="display: none;">
-            <button id="aumentarFonte">A+ Aumentar fonte</button>
-            <button id="diminuirFonte">A- Diminuir fonte</button>
-            <button id="altoContraste">◐ Alto contraste</button>
-        </div>
-    </div>
-
     <!-- Cabeçalho -->
     <header>
-        <div class="container">
-            <div class="logo">
-                <h1>🌱 Agro<span>Integra</span></h1>
-                <p class="tagline">Tecnologias de baixo carbono: Agro & Tech avançando juntos</p>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#inicio">Início</a></li>
-                    <li><a href="#problema">Problema</a></li>
-                    <li><a href="#poupa-terra">Efeito Poupa-Terra</a></li>
-                    <li><a href="#simulador">Simulador</a></li>
-                    <li><a href="#conclusao">Conclusão</a></li>
-                </ul>
-            </nav>
+        <div class="logo">
+            <h1>🌱 Agro<span>Integra</span></h1>
+            <p class="slogan">Efeito "Poupa-Terra": produção e sustentabilidade caminhando juntos</p>
         </div>
+        <!-- Menu de navegação -->
+        <nav>
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#objetivo">Objetivo</a></li>
+                <li><a href="#problema">Problema</a></li>
+                <li><a href="#ilpf">ILPF</a></li>
+                <li><a href="#poupa-terra">Poupa-Terra</a></li>
+                <li><a href="#jogo">Jogo</a></li>
+                <li><a href="#aplicacao">Aplicação</a></li>
+                <li><a href="#conclusao">Conclusão</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Conteúdo Principal -->
+    <!-- Botão de acessibilidade fixo -->
+    <div class="acessibilidade-btn" id="btnAcessibilidade" aria-label="Botão de acessibilidade">♿ Acessibilidade</div>
+    
+    <!-- Painel de acessibilidade (inicialmente oculto) -->
+    <div id="painelAcessibilidade" class="painel-acessibilidade">
+        <button id="aumentarFonte">A+ Aumentar fonte</button>
+        <button id="diminuirFonte">A- Diminuir fonte</button>
+        <button id="altoContraste">🔄 Alto contraste</button>
+        <button id="audioDescricao">🔊 Ouvir descrição do site</button>
+        <button id="fecharPainel">✖ Fechar</button>
+    </div>
+
+    <!-- Conteúdo principal -->
     <main>
         <!-- Seção Início -->
-        <section id="inicio" class="secao inicio">
-            <div class="container">
-                <div class="conteudo-inicio">
-                    <h2>Agro forte, futuro sustentável</h2>
-                    <p class="destaque">Equilíbrio entre produção agrícola e preservação do meio ambiente.</p>
-                    <p>A <strong>Integração Lavoura-Pecuária-Floresta (ILPF)</strong> é a resposta para reduzir o desmatamento, diminuir os gases de efeito estufa (GEE) e produzir alimentos de forma inteligente.</p>
-                    <a href="#simulador" class="botao">🌿 Simular Poupa-Terra</a>
-                </div>
+        <section id="inicio" class="secao">
+            <h2>Agro forte, futuro sustentável</h2>
+            <p>Equilíbrio entre produção e meio ambiente é possível. O <strong>AgroIntegra</strong> apresenta o <strong>Efeito "Poupa-Terra"</strong>, uma abordagem baseada na <strong>Integração Lavoura-Pecuária-Floresta (ILPF)</strong> para reduzir o desmatamento e promover o manejo sustentável do solo.</p>
+            <div class="destaque">
+                <p>🌍 <em>"Produzir mais, desmatando menos, preservando o futuro."</em></p>
             </div>
+        </section>
+
+        <!-- Seção Objetivo -->
+        <section id="objetivo" class="secao">
+            <h2>🎯 Objetivo do site</h2>
+            <p>Conscientizar sobre os impactos do desmatamento e do uso descontrolado das terras, apresentando a ILPF como ferramenta sustentável que integra lavoura, pecuária e floresta em uma mesma área.</p>
         </section>
 
         <!-- Seção Problema -->
-        <section id="problema" class="secao problema">
-            <div class="container">
-                <h2>O problema: uso excessivo das terras e emissão de GEE</h2>
-                <div class="cards">
-                    <article class="card">
-                        <h3>🏭 Gases de efeito estufa</h3>
-                        <p>A agricultura convencional contribui com cerca de <strong>25% das emissões globais</strong> de GEE, principalmente por desmatamento e queimadas.</p>
-                    </article>
-                    <article class="card">
-                        <h3>🌍 Desmatamento</h3>
-                        <p>A cada ano, milhões de hectares de floresta são derrubados para abrir novas áreas de pastagem e plantio.</p>
-                    </article>
-                    <article class="card">
-                        <h3>🧑‍🌾 Uso ineficiente da terra</h3>
-                        <p>Grandes áreas subutilizadas poderiam produzir mais alimentos sem abrir novas florestas.</p>
-                    </article>
+        <section id="problema" class="secao">
+            <h2>⚠️ Qual o impacto da má utilização das terras e do desmatamento?</h2>
+            <p>O desmatamento em massa e o uso inadequado do solo causam erosão, perda de nutrientes, diminuição da biodiversidade e contribuem para as mudanças climáticas. A agricultura tradicional, sem planejamento, esgota a terra e força a abertura de novas áreas florestais.</p>
+            <p><strong>Consequências:</strong> solos inférteis, menos água disponível, desaparecimento de espécies e prejuízos para a produção agrícola no longo prazo.</p>
+        </section>
+
+        <!-- Seção ILPF -->
+        <section id="ilpf" class="secao">
+            <h2>🌾 O que é ILPF?</h2>
+            <p><strong>Integração Lavoura-Pecuária-Floresta (ILPF)</strong> é uma estratégia sustentável que combina, na mesma área:</p>
+            <ul>
+                <li>🌱 <strong>Lavoura:</strong> produção de grãos, fibras ou bioenergia</li>
+                <li>🐄 <strong>Pecuária:</strong> criação de gado, ovinos ou outros animais</li>
+                <li>🌳 <strong>Floresta:</strong> plantio de árvores nativas ou exóticas</li>
+            </ul>
+            <p>Essa integração melhora o solo, diversifica a renda e recupera áreas degradadas sem precisar desmatar novas terras.</p>
+        </section>
+
+        <!-- Seção Poupa-Terra -->
+        <section id="poupa-terra" class="secao">
+            <h2>💚 O que é o Efeito "Poupa-Terra"?</h2>
+            <p>O <strong>Efeito Poupa-Terra</strong> é o conceito que dá nome à nossa abordagem: <strong>produzir mais alimentos e fibras na mesma área, sem expandir a fronteira agrícola sobre florestas nativas</strong>. A ILPF é a principal técnica para alcançar esse efeito, poupando terras virgens e recuperando pastagens degradadas.</p>
+            <p><strong>Sinergia</strong> é a palavra-chave: quando lavoura, pecuária e floresta trabalham juntas, o resultado é maior do que a soma das partes. O solo fica mais saudável, o carbono é sequestrado e o produtor ganha em produtividade.</p>
+        </section>
+
+        <!-- Seção Jogo -->
+        <section id="jogo" class="secao">
+            <h2>🎮 Jogo: Gestão Sustentável de Terras</h2>
+            <p><strong>Objetivo do jogo:</strong> Simular o Efeito "Poupa-Terra" posicionando cada elemento (Lavoura, Pecuária, Floresta) na área correta de integração. Quanto mais você acerta, mais entende como a ILPF funciona na prática!</p>
+            
+            <div class="container-jogo">
+                <div class="cenario-jogo" id="cenarioJogo">
+                    <div class="area-integracao" data-elemento="lavoura">
+                        <span class="label-area">🌾 Lavoura</span>
+                        <div class="elemento-colocado" id="lavouraColocada"></div>
+                    </div>
+                    <div class="area-integracao" data-elemento="pecuaria">
+                        <span class="label-area">🐄 Pecuária</span>
+                        <div class="elemento-colocado" id="pecuariaColocada"></div>
+                    </div>
+                    <div class="area-integracao" data-elemento="floresta">
+                        <span class="label-area">🌳 Floresta</span>
+                        <div class="elemento-colocado" id="florestaColocada"></div>
+                    </div>
                 </div>
+                
+                <div class="elementos-arrastaveis" id="elementosArrastaveis">
+                    <div class="elemento-dragao" draggable="true" data-tipo="lavoura" id="dragLavoura">🌾 Lavoura (Soja/Milho)</div>
+                    <div class="elemento-dragao" draggable="true" data-tipo="pecuaria" id="dragPecuaria">🐄 Pecuária (Gado)</div>
+                    <div class="elemento-dragao" draggable="true" data-tipo="floresta" id="dragFloresta">🌳 Floresta (Árvores)</div>
+                </div>
+                
+                <div class="feedback-jogo" id="feedbackJogo">Arraste cada ícone para a área correta de integração.</div>
+                <button id="reiniciarJogo">🔄 Reiniciar Jogo</button>
             </div>
         </section>
 
-        <!-- Seção Efeito Poupa-Terra (Sinergia ILPF) -->
-        <section id="poupa-terra" class="secao poupa-terra">
-            <div class="container">
-                <h2>🌾 Efeito "Poupa-Terra" + Sinergia 🌳</h2>
-                <p class="subtitulo">O que é o Efeito Poupa-Terra? É produzir mais alimentos na mesma área, sem desmatar novas florestas.</p>
-                
-                <div class="grid-sinergia">
-                    <div class="sinergia-card">
-                        <h3>🌽 Lavoura</h3>
-                        <p>Soja, milho, arroz - produção de grãos e alimentos.</p>
-                    </div>
-                    <div class="sinergia-card">
-                        <h3>🐄 Pecuária</h3>
-                        <p>Criação de gado, leite e carne com pastagem recuperada.</p>
-                    </div>
-                    <div class="sinergia-card">
-                        <h3>🌳 Floresta</h3>
-                        <p>Árvores nativas que sequestram carbono e fornecem madeira.</p>
-                    </div>
-                </div>
-                
-                <div class="sinergia-explicacao">
-                    <p><strong>✨ O que é "sinergia"?</strong> É quando os três elementos (lavoura + pecuária + floresta) trabalham juntos, se ajudando. Por exemplo: as árvores dão sombra para o gado, o gado aduba a terra com seus dejetos, e a lavoura produz alimentos. <strong>Juntos, eles poupam terras e evitam desmatamento!</strong></p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção Simulador (Funcionalidade Principal JavaScript) -->
-        <section id="simulador" class="secao simulador">
-            <div class="container">
-                <h2>📊 Simulador "Poupa-Terra"</h2>
-                <p>Escolha 3 produtos para plantar na mesma área, SEM desmatar e SEM agredir a terra.</p>
-                <p class="dica">👉 O segredo é a <strong>rotação de culturas e integração ILPF</strong>!</p>
-                
-                <div class="simulador-poupa-terra">
-                    <div class="area-disponivel">
-                        <label for="hectares">Área disponível (hectares):</label>
-                        <input type="number" id="hectares" value="100" min="10" max="1000" step="10">
-                    </div>
-                    
-                    <div class="produtos-escolha">
-                        <p>🌱 Escolha 3 produtos para cultivar de forma sustentável:</p>
-                        <div class="opcoes-produtos">
-                            <label class="produto-option">
-                                <input type="checkbox" name="produto" value="soja"> 🌿 Soja (rotação com pastagem)
-                            </label>
-                            <label class="produto-option">
-                                <input type="checkbox" name="produto" value="milho"> 🌽 Milho (consorciado com braquiária)
-                            </label>
-                            <label class="produto-option">
-                                <input type="checkbox" name="produto" value="cafe"> ☕ Café (sombreado por árvores)
-                            </label>
-                            <label class="produto-option">
-                                <input type="checkbox" name="produto" value="gado"> 🐄 Gado (integração com floresta)
-                            </label>
-                            <label class="produto-option">
-                                <input type="checkbox" name="produto" value="eucalipto"> 🌳 Eucalipto (ILPF com lavoura)
-                            </label>
-                            <label class="produto-option">
-                                <input type="checkbox" name="produto" value="feijao"> 🫘 Feijão (plantio direto)
-                            </label>
-                        </div>
-                        <button id="simularBtn">🌾 Simular Poupa-Terra</button>
-                    </div>
-                    
-                    <div id="resultadoSimulador" class="resultado-simulador">
-                        <p>⚡ Selecione 3 produtos e clique em "Simular Poupa-Terra".</p>
-                    </div>
-                </div>
-                
-                <div class="dado-importante">
-                    <p>📊 <strong>Dado importante:</strong> Com o efeito "Poupa-Terra" e ILPF, é possível produzir até <strong>3 vezes mais</strong> na mesma área, zerando a necessidade de desmatar novas florestas!</p>
-                </div>
-            </div>
+        <!-- Seção Aplicação -->
+        <section id="aplicacao" class="secao">
+            <h2>🧑‍🌾 Como aplicar na prática (nas produções)</h2>
+            <p>Na propriedade rural, o produtor pode:</p>
+            <ol>
+                <li><strong>Rotacionar áreas:</strong> plantar grãos, depois colocar o gado para pastar na palhada, e depois plantar árvores em linhas.</li>
+                <li><strong>Recuperar pastagens degradadas</strong> com plantio direto de grãos + árvores.</li>
+                <li><strong>Sistema silvipastoril:</strong> árvores + pasto + gado juntos.</li>
+                <li><strong>Sistemas agroflorestais</strong> para pequenas propriedades.</li>
+            </ol>
+            <p>Essas técnicas aumentam a produtividade, sequestram carbono e <strong>evitam a abertura de novas áreas</strong>.</p>
         </section>
 
         <!-- Seção Conclusão -->
-        <section id="conclusao" class="secao conclusao">
-            <div class="container">
-                <h2>Conclusão: Agro forte e futuro sustentável</h2>
-                <p>A ILPF e o <strong>Efeito Poupa-Terra</strong> mostram que é possível <strong>produzir mais, com menos impacto ambiental</strong>. Ao integrar lavoura, pecuária e floresta, o produtor rural:</p>
-                <ul>
-                    <li>✅ Diminui o desmatamento</li>
-                    <li>✅ Reduz a emissão de gases de efeito estufa (GEE)</li>
-                    <li>✅ Aumenta a renda com diversificação</li>
-                    <li>✅ Recupera solos degradados</li>
-                    <li>✅ Aplica o "Poupa-Terra": produzir sem abrir novas áreas</li>
-                </ul>
-                <p class="frase-final"><strong>AgroIntegra</strong> - Por um campo mais produtivo e um planeta mais vivo! 🌎</p>
-                <p class="frase-final">🌱 Agro & Tech avançando juntos para o futuro sustentável!</p>
-            </div>
+        <section id="conclusao" class="secao">
+            <h2>🌎 Conclusão</h2>
+            <p>A ILPF e o Efeito "Poupa-Terra" mostram que é possível conciliar produção agrícola com preservação ambiental. O Brasil pode ser um exemplo mundial de agro sustentável, alimentando famílias e protegendo florestas ao mesmo tempo.</p>
+        </section>
+
+        <!-- Seção Agradecimentos -->
+        <section class="secao agradecimentos">
+            <h2>🙏 Agradecimentos</h2>
+            <p>Obrigado por visitar o AgroIntegra! Juntos podemos construir um futuro onde o agro é forte e o futuro é sustentável.</p>
+            <p><em>Projeto desenvolvido para o Concurso Agrinho 2026.</em></p>
         </section>
     </main>
 
     <!-- Rodapé -->
     <footer>
-        <div class="container">
-            <p>Projeto criado para o Concurso Agrinho 2026 - "Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente"</p>
-            <p>© 2026 AgroIntegra - Conteúdo autoral | Efeito Poupa-Terra | ILPF</p>
-        </div>
+        <p>© 2026 AgroIntegra | Efeito "Poupa-Terra" - ILPF | Concurso Agrinho 2026</p>
+        <p>Kayane Emanuele Vaz de Oliveira</p>
     </footer>
 
     <script src="script.js"></script>
