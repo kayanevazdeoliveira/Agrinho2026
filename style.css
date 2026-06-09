@@ -1,1 +1,415 @@
+/* ============================================
+   ESTILOS PRINCIPAIS - AgroIntegra
+   Cores: Verde natureza (#2d5a27), Terra/marrom (#8B4513)
+   Sensações: Natureza, sustentabilidade, tecnologia, inovação
+   ============================================ */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #2c2c2c;
+    background-color: #fefdf8;
+    transition: all 0.3s ease;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ===== CABEÇALHO ===== */
+header {
+    background-color: #2d5a27;
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.logo h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.logo span {
+    color: #d4a259;
+}
+
+.tagline {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    font-style: italic;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #d4a259;
+}
+
+/* ===== SEÇÕES GERAIS ===== */
+.secao {
+    padding: 60px 0;
+}
+
+.secao h2 {
+    font-size: 2rem;
+    color: #2d5a27;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 3px solid #d4a259;
+    display: inline-block;
+    padding-bottom: 8px;
+    width: auto;
+}
+
+.secao .container {
+    text-align: center;
+}
+
+.secao .container > h2 {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Seção Início */
+.inicio {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+}
+
+.destaque {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #8B4513;
+    margin: 15px 0;
+}
+
+.botao {
+    display: inline-block;
+    background-color: #2d5a27;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.botao:hover {
+    background-color: #1f3e1b;
+    transform: scale(1.02);
+}
+
+/* Cards problema */
+.cards {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    flex: 1;
+    min-width: 220px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-left: 5px solid #d4a259;
+    text-align: left;
+}
+
+.card h3 {
+    color: #2d5a27;
+    margin-bottom: 12px;
+}
+
+/* Seção Poupa-Terra e Sinergia */
+.poupa-terra {
+    background-color: #f4f1e1;
+}
+
+.subtitulo {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: #5a3a1a;
+}
+
+.grid-sinergia {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 30px 0;
+}
+
+.sinergia-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    width: 220px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.sinergia-card h3 {
+    color: #2d5a27;
+    font-size: 1.5rem;
+}
+
+.sinergia-explicacao {
+    background: #2d5a27;
+    color: white;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: left;
+    margin-top: 20px;
+}
+
+/* Simulador Poupa-Terra */
+.simulador {
+    background: #e0f2e9;
+}
+
+.simulador-poupa-terra {
+    background: white;
+    padding: 30px;
+    border-radius: 24px;
+    max-width: 700px;
+    margin: 20px auto;
+    text-align: left;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.area-disponivel {
+    margin-bottom: 20px;
+}
+
+.area-disponivel label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.area-disponivel input {
+    width: 200px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #2d5a27;
+    border-radius: 8px;
+}
+
+.produtos-escolha {
+    margin: 20px 0;
+}
+
+.opcoes-produtos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.produto-option {
+    background: #f0f0f0;
+    padding: 10px 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.produto-option:hover {
+    background: #d4a259;
+    color: white;
+}
+
+.produto-option input {
+    margin-right: 8px;
+}
+
+button {
+    background-color: #8B4513;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 40px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #5c2e0c;
+}
+
+.resultado-simulador {
+    margin-top: 25px;
+    padding: 20px;
+    background: #fef7e0;
+    border-radius: 16px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.dado-importante {
+    background: #8B4513;
+    color: white;
+    padding: 20px;
+    border-radius: 16px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.dica {
+    font-style: italic;
+    color: #5a3a1a;
+    margin: 10px 0;
+}
+
+/* Conclusão */
+.conclusao {
+    background-color: #2d5a27;
+    color: white;
+}
+
+.conclusao h2 {
+    color: #d4a259;
+    border-bottom-color: white;
+}
+
+.conclusao ul {
+    margin: 20px 0 20px 35px;
+    text-align: left;
+    display: inline-block;
+}
+
+.frase-final {
+    font-size: 1.3rem;
+    text-align: center;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+/* Rodapé */
+footer {
+    background-color: #1a3a16;
+    color: #ccc;
+    text-align: center;
+    padding: 30px 0;
+    font-size: 0.9rem;
+}
+
+/* ===== BOTÃO DE ACESSIBILIDADE ===== */
+.botao-acessibilidade {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+#btnAcessibilidade {
+    background-color: #2d5a27;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.menu-acessibilidade {
+    background: white;
+    border-radius: 12px;
+    padding: 10px;
+    margin-top: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu-acessibilidade button {
+    background: #e0e0e0;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #2c2c2c;
+}
+
+/* Alto Contraste */
+.alto-contraste {
+    background-color: #000 !important;
+    color: #ff0 !important;
+}
+
+.alto-contraste header,
+.alto-contraste footer,
+.alto-contraste .card,
+.alto-contraste .simulador-poupa-terra,
+.alto-contraste .sinergia-card {
+    background-color: #111 !important;
+    color: #ff0 !important;
+    border-color: #ff0 !important;
+}
+
+.alto-contraste a,
+.alto-contraste button,
+.alto-contraste .botao {
+    color: #ff0 !important;
+    background-color: #333 !important;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    nav ul {
+        justify-content: center;
+    }
+    
+    .secao h2 {
+        font-size: 1.6rem;
+    }
+    
+    .cards {
+        flex-direction: column;
+    }
+    
+    .grid-sinergia {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .opcoes-produtos {
+        flex-direction: column;
+    }
+    
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+}
