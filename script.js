@@ -1,147 +1,239 @@
-// ============================================
-// SCRIPT - AgroIntegra
-// Funcionalidades: Acessibilidade + Simulador "Poupa-Terra"
-// Baseado no planejamento original da estudante
-// ============================================
+// script.js
 
-document.addEventListener('DOMContentLoaded', function() {
+// ==================== ACESSIBILIDADE ====================
 
-    // ========== MENU DE ACESSIBILIDADE ==========
-    const btnAcessibilidade = document.getElementById('btnAcessibilidade');
-    const menuAcessibilidade = document.getElementById('menuAcessibilidade');
+// Elementos do DOM
+const btnAcessibilidade = document.getElementById('btnAcessibilidade');
+const painelAcessibilidade = document.getElementById('painelAcessibilidade');
+const btnAumentar = document.getElementById('aumentarFonte');
+const btnDiminuir = document.getElementById('diminuirFonte');
+const btnContraste = document.getElementById('altoContraste');
+const btnAudio = document.getElementById('audioDescricao');
+const btnFecharPainel = document.getElementById('fecharPainel');
+
+// Abrir/fechar painel de acessibilidade
+btnAcessibilidade.addEventListener('click', () => {
+    if (painelAcessibilidade.style.display === 'flex') {
+        painelAcessibilidade.style.display = 'none';
+    } else {
+        painelAcessibilidade.style.display = 'flex';
+    }
+});
+
+btnFecharPainel.addEventListener('click', () => {
+    painelAcessibilidade.style.display = 'none';
+});
+
+// Aumentar fonte
+let tamanhoFonteAtual = 100; // em porcentagem
+btnAumentar.addEventListener('click', () => {
+    if (tamanhoFonteAtual < 140) {
+        tamanhoFonteAtual += 10;
+        document.body.style.fontSize = tamanhoFonteAtual + '%';
+    }
+});
+
+// Diminuir fonte
+btnDiminuir.addEventListener('click', () => {
+    if (tamanhoFonteAtual > 80) {
+        tamanhoFonteAtual -= 10;
+        document.body.style.fontSize = tamanhoFonteAtual + '%';
+    }
+});
+
+// Alto contraste
+let contrasteAtivo = false;
+btnContraste.addEventListener('click', () => {
+    if (contrasteAtivo) {
+        document.body.classList.remove('alto-contraste');
+        contrasteAtivo = false;
+    } else {
+        document.body.classList.add('alto-contraste');
+        contrasteAtivo = true;
+    }
+});
+
+// Áudio descrição do site (Web Speech API)
+btnAudio.addEventListener('click', () => {
+    if ('speechSynthesis' in window) {
+        const textoParaLer = `
+            Bem-vindo ao site AgroIntegra. 
+            Este site apresenta o Efeito Poupa-Terra e a Integração Lavoura-Pecuária-Floresta para reduzir o desmatamento. 
+            O objetivo é conscientizar sobre o uso sustentável das terras. 
+            O site possui seções sobre objetivo, problema da má utilização das terras, o que é ILPF, o jogo da gestão sustentável, e como aplicar na prática.
+            Use o jogo arrastando os ícones de lavoura, pecuária e floresta para as áreas corretas.
+        `;
+        const utterance = new SpeechSynthesisUtterance(textoParaLer);
+        utterance.lang = 'pt-BR';
+        utterance.rate = 0.9;
+        window.speechSynthesis.cancel(); // para não acumular
+        window.speechSynthesis.speak(utterance);
+    } else {
+        alert('Seu navegador não suporta áudio descrição.');
+    }
+});
+
+// ==================== JOGO DRAG AND DROP ====================
+
+// Elementos do jogo
+const elementosArrastaveis = document.querySelectorAll('.elemento-dragao');
+const areasIntegracao = document.querySelectorAll('.area-integracao');
+const feedbackJogo = document.getElementById('feedbackJogo');
+const btnReiniciar = document.getElementById('reiniciarJogo');
+
+// Estado do jogo: quais elementos já foram colocados corretamente
+let elementosColocados = {
+    lavoura: false,
+    pecuaria: false,
+    floresta: false
+};
+
+// Função para verificar se o jogo foi concluído
+function verificarConclusao() {
+    if (elementosColocados.lavoura && elementosColocados.pecuaria && elementosColocados.floresta) {
+        feedbackJogo.innerHTML = '🎉 PARABÉNS! 🎉 Você completou a integração ILPF! Este é o Efeito "Poupa-Terra": lavoura, pecuária e floresta juntos, sem desmatamento! 🌱🐄🌳';
+        feedbackJogo.style.backgroundColor = '#2d6a4f';
+        feedbackJogo.style.color = 'white';
+    }
+}
+
+// Configurar os elementos arrastáveis
+elementosArrastaveis.forEach(el => {
+    el.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', el.getAttribute('data-tipo'));
+        e.dataTransfer.effectAllowed = 'copy';
+        el.style.opacity = '0.5';
+    });
     
-    if (btnAcessibilidade) {
-        btnAcessibilidade.addEventListener('click', function() {
-            if (menuAcessibilidade.style.display === 'none' || menuAcessibilidade.style.display === '') {
-                menuAcessibilidade.style.display = 'flex';
-            } else {
-                menuAcessibilidade.style.display = 'none';
+    el.addEventListener('dragend', (e) => {
+        el.style.opacity = '1';
+    });
+});
+
+// Configurar as áreas de destino (drop zones)
+areasIntegracao.forEach(area => {
+    area.addEventListener('dragover', (e) => {
+        e.preventDefault(); // Necessário para permitir drop
+        e.dataTransfer.dropEffect = 'copy';
+        area.classList.add('drag-over');
+    });
+    
+    area.addEventListener('dragleave', () => {
+        area.classList.remove('drag-over');
+    });
+    
+    area.addEventListener('drop', (e) => {
+        e.preventDefault();
+        area.classList.remove('drag-over');
+        
+        const tipoElemento = e.dataTransfer.getData('text/plain');
+        const tipoArea = area.getAttribute('data-elemento');
+        
+        // Verifica se o elemento já foi colocado antes
+        if (elementosColocados[tipoElemento]) {
+            feedbackJogo.innerHTML = `⚠️ O elemento ${tipoElemento} já foi posicionado! Use o botão Reiniciar para jogar novamente.`;
+            feedbackJogo.style.backgroundColor = '#c49a6c';
+            feedbackJogo.style.color = '#283618';
+            return;
+        }
+        
+        // Verifica se o elemento corresponde à área
+        if (tipoElemento === tipoArea) {
+            // Colocação correta
+            elementosColocados[tipoElemento] = true;
+            
+            // Esconde o elemento arrastável correspondente
+            const elementoArrastavel = document.querySelector(`.elemento-dragao[data-tipo="${tipoElemento}"]`);
+            if (elementoArrastavel) {
+                elementoArrastavel.classList.add('oculto');
             }
-        });
-    }
-    
-    // Aumentar fonte
-    const aumentarFonteBtn = document.getElementById('aumentarFonte');
-    let tamanhoFonteAtual = 100;
-    
-    if (aumentarFonteBtn) {
-        aumentarFonteBtn.addEventListener('click', function() {
-            if (tamanhoFonteAtual < 140) {
-                tamanhoFonteAtual += 10;
-                document.body.style.fontSize = tamanhoFonteAtual + '%';
+            
+            // Adiciona o ícone na área de integração
+            const divColocada = area.querySelector('.elemento-colocado');
+            let icone = '';
+            let texto = '';
+            if (tipoElemento === 'lavoura') {
+                icone = '🌾🌽 ';
+                texto = 'Lavoura integrada!';
+            } else if (tipoElemento === 'pecuaria') {
+                icone = '🐄🐮 ';
+                texto = 'Pecuária integrada!';
+            } else if (tipoElemento === 'floresta') {
+                icone = '🌳🌲 ';
+                texto = 'Floresta integrada!';
             }
-        });
-    }
-    
-    // Diminuir fonte
-    const diminuirFonteBtn = document.getElementById('diminuirFonte');
-    if (diminuirFonteBtn) {
-        diminuirFonteBtn.addEventListener('click', function() {
-            if (tamanhoFonteAtual > 70) {
-                tamanhoFonteAtual -= 10;
-                document.body.style.fontSize = tamanhoFonteAtual + '%';
+            divColocada.innerHTML = `${icone} ${texto}`;
+            
+            feedbackJogo.innerHTML = `✅ Correto! ${tipoElemento} foi integrado(a) com sucesso! Continue assim.`;
+            feedbackJogo.style.backgroundColor = '#52b788';
+            feedbackJogo.style.color = 'white';
+            
+            // Verifica se o jogo terminou
+            verificarConclusao();
+        } else {
+            // Colocação errada - aparece um X e o símbolo volta (já que não movemos o elemento)
+            feedbackJogo.innerHTML = `❌ Errado! ${tipoElemento} não pertence a esta área. Tente novamente.`;
+            feedbackJogo.style.backgroundColor = '#e9c46a';
+            feedbackJogo.style.color = '#283618';
+            // Mostra X temporário na área
+            const xTemp = document.createElement('div');
+            xTemp.textContent = '❌';
+            xTemp.style.fontSize = '2rem';
+            xTemp.style.position = 'absolute';
+            xTemp.style.opacity = '0.8';
+            area.style.position = 'relative';
+            area.appendChild(xTemp);
+            setTimeout(() => {
+                xTemp.remove();
+            }, 800);
+        }
+        
+        setTimeout(() => {
+            if (!(elementosColocados.lavoura && elementosColocados.pecuaria && elementosColocados.floresta)) {
+                feedbackJogo.style.backgroundColor = '#e9ecef';
+                feedbackJogo.style.color = '#283618';
+                if (feedbackJogo.innerHTML.includes('Correto')) {
+                    feedbackJogo.innerHTML = 'Continue arrastando os elementos!';
+                }
             }
-        });
-    }
-    
-    // Alto contraste
-    const altoContrasteBtn = document.getElementById('altoContraste');
-    if (altoContrasteBtn) {
-        altoContrasteBtn.addEventListener('click', function() {
-            document.body.classList.toggle('alto-contraste');
-        });
-    }
-    
-    // ========== SIMULADOR "POUPA-TERRA" (FUNCIONALIDADE PRINCIPAL) ==========
-    // O usuário escolhe 3 produtos para plantar na mesma área, sem desmatar
-    
-    const botaoSimular = document.getElementById('simularBtn');
-    const inputHectares = document.getElementById('hectares');
-    const resultadoDiv = document.getElementById('resultadoSimulador');
-    const checkboxesProdutos = document.querySelectorAll('input[name="produto"]');
-    
-    // Dicionário com benefícios de cada produto sustentável
-    const beneficiosProdutos = {
-        soja: "🌿 Soja com rotação de cultura: recupera o solo e evita pragas.",
-        milho: "🌽 Milho consorciado com braquiária: produz palha para o solo e alimenta o gado.",
-        cafe: "☕ Café sombreado por árvores: protege nascentes e atrai pássaros.",
-        gado: "🐄 Gado em ILPF: pastagem recuperada + árvores que dão sombra e sequestram carbono.",
-        eucalipto: "🌳 Eucalipto em integração: fornece madeira sem derrubar floresta nativa.",
-        feijao: "🫘 Feijão no plantio direto: evita erosão e mantém a terra viva."
+        }, 2000);
+    });
+});
+
+// Botão reiniciar jogo
+btnReiniciar.addEventListener('click', () => {
+    // Resetar estado
+    elementosColocados = {
+        lavoura: false,
+        pecuaria: false,
+        floresta: false
     };
     
-    function simularPoupaTerra() {
-        // 1. Pegar os produtos selecionados
-        let produtosSelecionados = [];
-        checkboxesProdutos.forEach(checkbox => {
-            if (checkbox.checked) {
-                produtosSelecionados.push(checkbox.value);
-            }
-        });
-        
-        // 2. Validar: precisa de exatamente 3 produtos
-        if (produtosSelecionados.length !== 3) {
-            resultadoDiv.innerHTML = `
-                <p>⚠️ <strong>Você selecionou ${produtosSelecionados.length} produto(s).</strong></p>
-                <p>O Efeito "Poupa-Terra" funciona melhor com <strong>3 produtos diferentes</strong> plantados na mesma área, em rotação ou integração.</p>
-                <p>🌱 Selecione exatamente 3 opções para simular uma ILPF completa!</p>
-            `;
-            return;
-        }
-        
-        // 3. Pegar área em hectares
-        let hectares = parseFloat(inputHectares.value);
-        if (isNaN(hectares) || hectares <= 0) {
-            resultadoDiv.innerHTML = `<p>⚠️ Por favor, digite uma área válida em hectares.</p>`;
-            return;
-        }
-        
-        // 4. Calcular o "Poupa-Terra": economia de área em relação ao sistema tradicional
-        // Sistema tradicional precisaria de 3x mais área para produzir as 3 culturas separadamente
-        let areaEconomizada = hectares * 2; // área que NÃO precisou ser desmatada
-        let reducaoCO2 = areaEconomizada * 3.5; // cada hectare poupado = 3.5 ton CO2/ano
-        
-        // 5. Montar mensagem personalizada
-        let listaBeneficios = "";
-        produtosSelecionados.forEach(produto => {
-            if (beneficiosProdutos[produto]) {
-                listaBeneficios += `<li>${beneficiosProdutos[produto]}</li>`;
-            }
-        });
-        
-        // Nomes bonitos dos produtos selecionados
-        const nomesProdutos = {
-            soja: "Soja", milho: "Milho", cafe: "Café", 
-            gado: "Gado (Pecuária)", eucalipto: "Eucalipto", feijao: "Feijão"
-        };
-        let nomesSelecionados = produtosSelecionados.map(p => nomesProdutos[p] || p).join(", ");
-        
-        resultadoDiv.innerHTML = `
-            <p><strong>🌾 RESULTADO DO EFEITO "POUPA-TERRA" 🌾</strong></p>
-            <p>✅ Você integrou na mesma área de <strong>${hectares} hectares</strong>:</p>
-            <p><strong>📦 ${nomesSelecionados}</strong></p>
-            
-            <ul style="text-align: left; margin: 15px 0;">
-                ${listaBeneficios}
-            </ul>
-            
-            <p><strong>📊 Números da sustentabilidade:</strong></p>
-            <ul style="text-align: left;">
-                <li>🌱 Área economizada (NÃO desmatada): <strong>${areaEconomizada} hectares</strong></li>
-                <li>💨 Redução de CO₂ por ano: <strong>${reducaoCO2.toFixed(1)} toneladas</strong></li>
-                <li>🌳 Equivalente a plantar: <strong>${Math.round(reducaoCO2 * 45)} árvores</strong></li>
-            </ul>
-            
-            <p style="margin-top: 15px; background: #2d5a27; color: white; padding: 10px; border-radius: 12px;">
-            ✨ <strong>Parabéns!</strong> Você aplicou o Efeito "Poupa-Terra": produziu mais, sem desmatar! ✨
-            </p>
-        `;
-    }
+    // Mostrar novamente todos os elementos arrastáveis
+    elementosArrastaveis.forEach(el => {
+        el.classList.remove('oculto');
+    });
     
-    // Adicionar evento ao botão
-    if (botaoSimular) {
-        botaoSimular.addEventListener('click', simularPoupaTerra);
-    }
+    // Limpar as áreas de integração
+    areasIntegracao.forEach(area => {
+        const divColocada = area.querySelector('.elemento-colocado');
+        divColocada.innerHTML = '';
+    });
     
-    console.log('🌱 AgroIntegra carregado! Simulador "Poupa-Terra" ativo - ILPF e sinergia para o futuro sustentável.');
+    // Resetar feedback
+    feedbackJogo.innerHTML = 'Jogo reiniciado! Arraste cada ícone para a área correta de integração.';
+    feedbackJogo.style.backgroundColor = '#e9ecef';
+    feedbackJogo.style.color = '#283618';
 });
+
+// ==================== FECHAR PAINEL AO CLICAR FORA ====================
+document.addEventListener('click', (event) => {
+    if (!btnAcessibilidade.contains(event.target) && !painelAcessibilidade.contains(event.target)) {
+        if (painelAcessibilidade.style.display === 'flex') {
+            painelAcessibilidade.style.display = 'none';
+        }
+    }
+});
+
+// Mensagem inicial no console para estudantes
+console.log('Site AgroIntegra carregado! Use o botão de acessibilidade no canto inferior direito.');
